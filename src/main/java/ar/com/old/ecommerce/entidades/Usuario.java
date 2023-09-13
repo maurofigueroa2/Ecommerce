@@ -1,13 +1,21 @@
 package ar.com.old.ecommerce.entidades;
 
+
+import javax.persistence.*;
+import java.util.Set;
+
+@Entity
 public class Usuario {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nombre;
     private String apellido;
     private String telefono;
     private String nombreUsuario;
     private String contrasenia;
-    private Rol rol;
+    @OneToMany
+    private Set<Rol> roles;
 
     public Usuario() {
     }
@@ -60,11 +68,5 @@ public class Usuario {
         this.contrasenia = contrasenia;
     }
 
-    public Rol getRol() {
-        return rol;
-    }
 
-    public void setRol(Rol rol) {
-        this.rol = rol;
-    }
 }
