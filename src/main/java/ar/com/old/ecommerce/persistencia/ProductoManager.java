@@ -1,5 +1,5 @@
 package ar.com.old.ecommerce.persistencia;
-import ar.com.old.ecommerce.entidades.Usuario;
+import ar.com.old.ecommerce.entidades.Producto;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -7,40 +7,40 @@ import javax.persistence.Persistence;
 import java.util.List;
 
 
-public class UsuarioManager {
+public class ProductoManager {
         private EntityManagerFactory entityManagerFactory;
         private EntityManager entityManager;
 
-        public UsuarioManager() {
+        public ProductoManager() {
             entityManagerFactory = Persistence.createEntityManagerFactory("my-persistence-unit");
             entityManager = entityManagerFactory.createEntityManager();
         }
 
-        public void createUsuario(Usuario usuario) {
+        public void createProducto(Producto producto) {
             entityManager.getTransaction().begin();
-            entityManager.persist(usuario);
+            entityManager.persist(producto);
             entityManager.getTransaction().commit();
         }
 
-        public Usuario getUsuario(Long id) {
-            return entityManager.find(Usuario.class, id);
+        public Producto getProducto(Long id) {
+            return entityManager.find(Producto.class, id);
         }
 
-        public List<Usuario> getAllUsuarios() {
-            return entityManager.createQuery("SELECT e FROM Usuario e", Usuario.class).getResultList();
+        public List<Producto> getAllProductos() {
+            return entityManager.createQuery("SELECT e FROM Producto e", Producto.class).getResultList();
         }
 
-        public void updateUsuario(Usuario Usuario) {
+        public void updateProducto(Producto producto) {
             entityManager.getTransaction().begin();
-            entityManager.merge(Usuario);
+            entityManager.merge(producto);
             entityManager.getTransaction().commit();
         }
 
-        public void deleteUsuario(Long id) {
-            Usuario Usuario = entityManager.find(Usuario.class, id);
-            if (Usuario != null) {
+        public void deleteProducto(Long id) {
+            Producto Producto = entityManager.find(Producto.class, id);
+            if (Producto != null) {
                 entityManager.getTransaction().begin();
-                entityManager.remove(Usuario);
+                entityManager.remove(Producto);
                 entityManager.getTransaction().commit();
             }
         }
