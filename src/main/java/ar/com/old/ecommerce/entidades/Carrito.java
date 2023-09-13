@@ -8,6 +8,9 @@ public class Carrito {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @OneToOne
+    private Usuario usuario;
+
     @ManyToMany
     private List<Publicacion> publicaciones;
 

@@ -1,12 +1,16 @@
 package ar.com.old.ecommerce.entidades;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 public class Producto {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.AUTO,generator="native")
+    @GenericGenerator(name = "native",strategy = "native")
     private Long id;
     private String nombre;
     private String descripcion;
@@ -15,6 +19,7 @@ public class Producto {
     private Set<Categoria> categorias;
 
     public Producto() {
+        categorias = new HashSet<>();
     }
 
     public Long getId() {
@@ -55,5 +60,9 @@ public class Producto {
 
     public void setCategorias(Set<Categoria> categorias) {
         this.categorias = categorias;
+    }
+
+    public void agregarCategoria(Categoria categoria){
+    this.categorias.add(categoria);
     }
 }
