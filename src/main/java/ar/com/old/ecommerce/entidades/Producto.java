@@ -58,9 +58,6 @@ public class Producto {
         return categorias;
     }
 
-    public void setCategorias(Set<Categoria> categorias) {
-        this.categorias = categorias;
-    }
 
     public void agregarCategoria(Categoria categoria){
     this.categorias.add(categoria);
