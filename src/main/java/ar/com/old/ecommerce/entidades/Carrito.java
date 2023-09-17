@@ -1,11 +1,12 @@
 package ar.com.old.ecommerce.entidades;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 @Entity
 public class Carrito {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToOne
@@ -15,7 +16,7 @@ public class Carrito {
     private List<Publicacion> publicaciones;
 
     public Carrito() {
-
+        this.publicaciones = new ArrayList<>();
     }
 
     public void agregarPublicacion(Publicacion publicacion){
