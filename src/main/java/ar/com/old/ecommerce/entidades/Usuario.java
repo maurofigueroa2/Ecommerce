@@ -5,20 +5,42 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@Table(name = "usuario")
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Long id;
+
+    @Column(name = "nombre")
     private String nombre;
+
+    @Column(name = "apellido")
     private String apellido;
+
+    @Column(name = "telefono")
     private String telefono;
+
+    @Column(name = "nombre_usuario")
     private String nombreUsuario;
+
+    @Column(name = "contrasenia")
     private String contrasenia;
-    @OneToMany
-    private Set<Rol> roles;
+
+    @OneToOne(mappedBy = "usuario")
+    private Carrito carrito;
+
+    @ManyToOne
+    @JoinColumn(name = "rol_id", referencedColumnName = "id")
+    private Rol rol;
+
+    @OneToOne
+    private Tienda tienda;
+
 
     public Usuario() {
     }
+
 
     public Long getId() {
         return id;
@@ -68,5 +90,19 @@ public class Usuario {
         this.contrasenia = contrasenia;
     }
 
+    public Carrito getCarrito() {
+        return carrito;
+    }
 
+    public void setCarrito(Carrito carrito) {
+        this.carrito = carrito;
+    }
+
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
+    }
 }

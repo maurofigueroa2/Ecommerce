@@ -12,9 +12,19 @@ public class Producto {
     @GeneratedValue(strategy= GenerationType.AUTO,generator="native")
     @GenericGenerator(name = "native",strategy = "native")
     private Long id;
+
+    @Column(name = "nombre")
     private String nombre;
+
+    @Column(name = "descripcion")
     private String descripcion;
+
+    @Column(name = "precio")
     private double precio;
+
+    @Column(name = "cantidad")
+    private Integer cantidad;
+
     @ElementCollection
     private Set<Categoria> categorias;
 
