@@ -2,17 +2,23 @@ package ar.com.old.ecommerce.entidades;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
+@Table(name = "publicaciones")
 public class Publicacion {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
     @ManyToMany
-    @Column(name = "productos")
+    @JoinTable(name = "rel_publi_prod",
+            joinColumns = {@JoinColumn(name = "fk_publicacion")},
+            inverseJoinColumns = {@JoinColumn(name = "fk_productos")}
+    )
     private List<Producto> productos;
 
     @Column(name = "fecha_publicacion")
@@ -22,7 +28,17 @@ public class Publicacion {
     @Column(name = "estado")
     private Estado estado;
 
+
+    @ManyToOne
+    @JoinColumn(name = "fk_tienda")
+    private Tienda tienda;
+
     public Publicacion() {
+        this.productos = new ArrayList<>();
+    }
+
+    public void agregarProductos(Producto producto){
+        productos.add(producto);
     }
 
     public Long getId() {
@@ -39,5 +55,34 @@ public class Publicacion {
 
     public void setEstado(Estado estado) {
         this.estado = estado;
+    }
+
+    public LocalDate getFechaPublicacion() {
+        return fechaPublicacion;
+    }
+
+    public void setFechaPublicacion(LocalDate fechaPublicacion) {
+        this.fechaPublicacion = fechaPublicacion;
+    }
+
+    public Tienda getTienda() {
+        return tienda;
+    }
+
+    public void setTienda(Tienda tienda) {
+        this.tienda = tienda;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Publicacion that = (Publicacion) o;
+        return Objects.equals(getId(), that.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 }

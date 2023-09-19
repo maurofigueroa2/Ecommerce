@@ -4,13 +4,14 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
+@Table(name = "productos")
 public class Producto {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO,generator="native")
-    @GenericGenerator(name = "native",strategy = "native")
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "nombre")
@@ -25,7 +26,10 @@ public class Producto {
     @Column(name = "cantidad")
     private Integer cantidad;
 
-    @ElementCollection
+    @ElementCollection(targetClass = Categoria.class)
+    @JoinTable(name = "rel_categorias_productos",joinColumns = @JoinColumn(name = "fk_producto"))
+    @Column(name = "categoria")
+    @Enumerated(EnumType.STRING)
     private Set<Categoria> categorias;
 
     public Producto() {
@@ -68,8 +72,32 @@ public class Producto {
         return categorias;
     }
 
+    public Integer getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public void setCategorias(Set<Categoria> categorias) {
+        this.categorias = categorias;
+    }
 
     public void agregarCategoria(Categoria categoria){
     this.categorias.add(categoria);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Producto producto = (Producto) o;
+        return Objects.equals(getId(), producto.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 }
