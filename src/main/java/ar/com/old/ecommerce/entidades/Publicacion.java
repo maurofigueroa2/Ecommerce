@@ -30,7 +30,7 @@ public class Publicacion {
 
 
     @ManyToOne
-    @JoinColumn(name = "fk_tienda")
+    @JoinColumn(name = "fk_tienda", referencedColumnName = "id")
     private Tienda tienda;
 
     public Publicacion() {

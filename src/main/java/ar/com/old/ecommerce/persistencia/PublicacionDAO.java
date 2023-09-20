@@ -7,36 +7,36 @@ import javax.persistence.Persistence;
 import java.util.List;
 
 
-public class PublicacionManager {
+public class PublicacionDAO implements DAO<Publicacion>{
         private EntityManagerFactory entityManagerFactory;
         private EntityManager entityManager;
 
-        public PublicacionManager() {
-            entityManagerFactory = Persistence.createEntityManagerFactory("my-persistence-unit");
+        public PublicacionDAO() {
+            entityManagerFactory = Persistence.createEntityManagerFactory("mysql-persistence");
             entityManager = entityManagerFactory.createEntityManager();
         }
 
-        public void createPublicacion(Publicacion publicacion) {
+        public void create(Publicacion publicacion) {
             entityManager.getTransaction().begin();
             entityManager.persist(publicacion);
             entityManager.getTransaction().commit();
         }
 
-        public Publicacion getPublicacion(Long id) {
+        public Publicacion getOneById(Long id) {
             return entityManager.find(Publicacion.class, id);
         }
 
-        public List<Publicacion> getAllPublicacions() {
+        public List<Publicacion> getAll() {
             return entityManager.createQuery("SELECT e FROM Publicacion e", Publicacion.class).getResultList();
         }
 
-        public void updatePublicacion(Publicacion publicacion) {
+        public void update(Publicacion publicacion) {
             entityManager.getTransaction().begin();
             entityManager.merge(publicacion);
             entityManager.getTransaction().commit();
         }
 
-        public void deletePublicacion(Long id) {
+        public void deleteById(Long id) {
             Publicacion Publicacion = entityManager.find(Publicacion.class, id);
             if (Publicacion != null) {
                 entityManager.getTransaction().begin();

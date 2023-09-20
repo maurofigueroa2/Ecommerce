@@ -1,7 +1,3 @@
-import ar.com.old.ecommerce.entidades.Categoria;
-import ar.com.old.ecommerce.entidades.Producto;
-import ar.com.old.ecommerce.persistencia.ProductoManager;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
