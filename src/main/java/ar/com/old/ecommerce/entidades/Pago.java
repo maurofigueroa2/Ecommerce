@@ -3,7 +3,8 @@ package ar.com.old.ecommerce.entidades;
 import javax.persistence.*;
 import java.util.Objects;
 
-@Entity(name = "pago")
+@Entity
+@Table(name = "pago")
 public class Pago {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,6 +14,8 @@ public class Pago {
     @OneToOne
     @JoinColumn(name = "fk_carrito")
     private Carrito carrito;
+
+
 
     public Long getId() {
         return id;

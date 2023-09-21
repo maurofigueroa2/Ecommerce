@@ -14,7 +14,7 @@ public class testMain {
 //        pm.createProducto(producto);
 //        pm.close();
 //
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("my-persistence-unit");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("mysql-persistence");
         EntityManager em = emf.createEntityManager();
 
     }
