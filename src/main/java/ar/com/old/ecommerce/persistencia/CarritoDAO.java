@@ -1,46 +1,45 @@
 package ar.com.old.ecommerce.persistencia;
-import ar.com.old.ecommerce.entidades.Usuario;
+import ar.com.old.ecommerce.entidades.Carrito;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
 
-
-public class UsuarioManager {
+public class CarritoDAO implements DAO<Carrito>{
         private EntityManagerFactory entityManagerFactory;
         private EntityManager entityManager;
 
-        public UsuarioManager() {
-            entityManagerFactory = Persistence.createEntityManagerFactory("my-persistence-unit");
+        public CarritoDAO() {
+            entityManagerFactory = Persistence.createEntityManagerFactory("mysql-persistence");
             entityManager = entityManagerFactory.createEntityManager();
         }
 
-        public void createUsuario(Usuario usuario) {
+        public void create(Carrito carrito) {
             entityManager.getTransaction().begin();
-            entityManager.persist(usuario);
+            entityManager.persist(carrito);
             entityManager.getTransaction().commit();
         }
 
-        public Usuario getUsuario(Long id) {
-            return entityManager.find(Usuario.class, id);
+        public Carrito getOneById(Long id) {
+            return entityManager.find(Carrito.class, id);
         }
 
-        public List<Usuario> getAllUsuarios() {
-            return entityManager.createQuery("SELECT e FROM Usuario e", Usuario.class).getResultList();
+        public List<Carrito> getAll() {
+            return entityManager.createQuery("SELECT e FROM Carrito e", Carrito.class).getResultList();
         }
 
-        public void updateUsuario(Usuario Usuario) {
+        public void update(Carrito carrito) {
             entityManager.getTransaction().begin();
-            entityManager.merge(Usuario);
+            entityManager.merge(carrito);
             entityManager.getTransaction().commit();
         }
 
-        public void deleteUsuario(Long id) {
-            Usuario Usuario = entityManager.find(Usuario.class, id);
-            if (Usuario != null) {
+        public void deleteById(Long id) {
+            Carrito Carrito = entityManager.find(Carrito.class, id);
+            if (Carrito != null) {
                 entityManager.getTransaction().begin();
-                entityManager.remove(Usuario);
+                entityManager.remove(Carrito);
                 entityManager.getTransaction().commit();
             }
         }

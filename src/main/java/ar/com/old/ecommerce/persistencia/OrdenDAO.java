@@ -1,46 +1,45 @@
 package ar.com.old.ecommerce.persistencia;
-import ar.com.old.ecommerce.entidades.Producto;
+import ar.com.old.ecommerce.entidades.Orden;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
 
-
-public class ProductoManager {
+public class OrdenDAO implements DAO<Orden>{
         private EntityManagerFactory entityManagerFactory;
         private EntityManager entityManager;
 
-        public ProductoManager() {
-            entityManagerFactory = Persistence.createEntityManagerFactory("my-persistence-unit");
+        public OrdenDAO() {
+            entityManagerFactory = Persistence.createEntityManagerFactory("mysql-persistence");
             entityManager = entityManagerFactory.createEntityManager();
         }
 
-        public void createProducto(Producto producto) {
+        public void create(Orden orden) {
             entityManager.getTransaction().begin();
-            entityManager.persist(producto);
+            entityManager.persist(orden);
             entityManager.getTransaction().commit();
         }
 
-        public Producto getProducto(Long id) {
-            return entityManager.find(Producto.class, id);
+        public Orden getOneById(Long id) {
+            return entityManager.find(Orden.class, id);
         }
 
-        public List<Producto> getAllProductos() {
-            return entityManager.createQuery("SELECT e FROM Producto e", Producto.class).getResultList();
+        public List<Orden> getAll() {
+            return entityManager.createQuery("SELECT e FROM Orden e", Orden.class).getResultList();
         }
 
-        public void updateProducto(Producto producto) {
+        public void update(Orden orden) {
             entityManager.getTransaction().begin();
-            entityManager.merge(producto);
+            entityManager.merge(orden);
             entityManager.getTransaction().commit();
         }
 
-        public void deleteProducto(Long id) {
-            Producto Producto = entityManager.find(Producto.class, id);
-            if (Producto != null) {
+        public void deleteById(Long id) {
+            Orden Orden = entityManager.find(Orden.class, id);
+            if (Orden != null) {
                 entityManager.getTransaction().begin();
-                entityManager.remove(Producto);
+                entityManager.remove(Orden);
                 entityManager.getTransaction().commit();
             }
         }

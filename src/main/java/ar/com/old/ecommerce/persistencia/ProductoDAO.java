@@ -1,45 +1,46 @@
 package ar.com.old.ecommerce.persistencia;
-import ar.com.old.ecommerce.entidades.Carrito;
+import ar.com.old.ecommerce.entidades.Producto;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
 
-public class CarritoManager {
+
+public class ProductoDAO implements DAO<Producto>{
         private EntityManagerFactory entityManagerFactory;
         private EntityManager entityManager;
 
-        public CarritoManager() {
-            entityManagerFactory = Persistence.createEntityManagerFactory("my-persistence-unit");
+        public ProductoDAO() {
+            entityManagerFactory = Persistence.createEntityManagerFactory("mysql-persistence");
             entityManager = entityManagerFactory.createEntityManager();
         }
 
-        public void createCarrito(Carrito carrito) {
+        public void create(Producto producto) {
             entityManager.getTransaction().begin();
-            entityManager.persist(carrito);
+            entityManager.persist(producto);
             entityManager.getTransaction().commit();
         }
 
-        public Carrito getCarrito(Long id) {
-            return entityManager.find(Carrito.class, id);
+        public Producto getOneById(Long id) {
+            return entityManager.find(Producto.class, id);
         }
 
-        public List<Carrito> getAllCarritos() {
-            return entityManager.createQuery("SELECT e FROM Carrito e", Carrito.class).getResultList();
+        public List<Producto> getAll() {
+            return entityManager.createQuery("SELECT e FROM Producto e", Producto.class).getResultList();
         }
 
-        public void updateCarrito(Carrito carrito) {
+        public void update(Producto producto) {
             entityManager.getTransaction().begin();
-            entityManager.merge(carrito);
+            entityManager.merge(producto);
             entityManager.getTransaction().commit();
         }
 
-        public void deleteCarrito(Long id) {
-            Carrito Carrito = entityManager.find(Carrito.class, id);
-            if (Carrito != null) {
+        public void deleteById(Long id) {
+            Producto Producto = entityManager.find(Producto.class, id);
+            if (Producto != null) {
                 entityManager.getTransaction().begin();
-                entityManager.remove(Carrito);
+                entityManager.remove(Producto);
                 entityManager.getTransaction().commit();
             }
         }

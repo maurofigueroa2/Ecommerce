@@ -2,13 +2,14 @@ package ar.com.old.ecommerce.entidades;
 
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @Table(name = "usuario")
 public class Usuario {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
@@ -27,14 +28,14 @@ public class Usuario {
     @Column(name = "contrasenia")
     private String contrasenia;
 
-    @OneToOne(mappedBy = "usuario")
+    @OneToOne
     private Carrito carrito;
 
     @ManyToOne
-    @JoinColumn(name = "rol_id", referencedColumnName = "id")
+    @JoinColumn(name = "fk_rol")
     private Rol rol;
 
-    @OneToOne
+    @OneToOne(mappedBy = "usuario")
     private Tienda tienda;
 
 
@@ -104,5 +105,26 @@ public class Usuario {
 
     public void setRol(Rol rol) {
         this.rol = rol;
+    }
+
+    public Tienda getTienda() {
+        return tienda;
+    }
+
+    public void setTienda(Tienda tienda) {
+        this.tienda = tienda;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Usuario usuario = (Usuario) o;
+        return Objects.equals(getId(), usuario.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 }

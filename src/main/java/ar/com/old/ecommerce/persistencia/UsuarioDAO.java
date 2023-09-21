@@ -1,5 +1,5 @@
 package ar.com.old.ecommerce.persistencia;
-import ar.com.old.ecommerce.entidades.Tienda;
+import ar.com.old.ecommerce.entidades.Usuario;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -7,40 +7,40 @@ import javax.persistence.Persistence;
 import java.util.List;
 
 
-public class TiendaManager {
+public class UsuarioDAO implements DAO<Usuario>{
         private EntityManagerFactory entityManagerFactory;
         private EntityManager entityManager;
 
-        public TiendaManager() {
-            entityManagerFactory = Persistence.createEntityManagerFactory("my-persistence-unit");
+        public UsuarioDAO() {
+            entityManagerFactory = Persistence.createEntityManagerFactory("mysql-persistence");
             entityManager = entityManagerFactory.createEntityManager();
         }
 
-        public void createTienda(Tienda tienda) {
+        public void create(Usuario usuario) {
             entityManager.getTransaction().begin();
-            entityManager.persist(tienda);
+            entityManager.persist(usuario);
             entityManager.getTransaction().commit();
         }
 
-        public Tienda getTienda(Long id) {
-            return entityManager.find(Tienda.class, id);
+        public Usuario getOneById(Long id) {
+            return entityManager.find(Usuario.class, id);
         }
 
-        public List<Tienda> getAllTiendas() {
-            return entityManager.createQuery("SELECT e FROM Tienda e", Tienda.class).getResultList();
+        public List<Usuario> getAll() {
+            return entityManager.createQuery("SELECT e FROM Usuario e", Usuario.class).getResultList();
         }
 
-        public void updateTienda(Tienda tienda) {
+        public void update(Usuario Usuario) {
             entityManager.getTransaction().begin();
-            entityManager.merge(tienda);
+            entityManager.merge(Usuario);
             entityManager.getTransaction().commit();
         }
 
-        public void deleteTienda(Long id) {
-            Tienda Tienda = entityManager.find(Tienda.class, id);
-            if (Tienda != null) {
+        public void deleteById(Long id) {
+            Usuario Usuario = entityManager.find(Usuario.class, id);
+            if (Usuario != null) {
                 entityManager.getTransaction().begin();
-                entityManager.remove(Tienda);
+                entityManager.remove(Usuario);
                 entityManager.getTransaction().commit();
             }
         }
