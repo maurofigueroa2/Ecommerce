@@ -13,6 +13,7 @@ public class Carrito {
     private Long id;
 
     @OneToOne
+    @JoinColumn(name = "fk_usuario", referencedColumnName = "id")
     private Usuario usuario;
 
     @ManyToMany
@@ -30,13 +31,6 @@ public class Carrito {
 
     public Carrito() {
         this.publicaciones = new ArrayList<>();
-    }
-
-    public void agregarPublicacion(Publicacion publicacion){
-        this.publicaciones.add(publicacion);
-    }
-    public void eliminarPublicacion(Publicacion publicacion){
-        this.publicaciones.remove(publicacion);
     }
 
     public Long getId() {
@@ -61,6 +55,17 @@ public class Carrito {
 
     public void setPago(Pago pago) {
         this.pago = pago;
+    }
+
+    public List<Publicacion> getPublicaciones() {
+        return publicaciones;
+    }
+
+    public void agregarPublicacion(Publicacion publicacion){
+        this.publicaciones.add(publicacion);
+    }
+    public void eliminarPublicacion(Publicacion publicacion){
+        this.publicaciones.remove(publicacion);
     }
 
     @Override

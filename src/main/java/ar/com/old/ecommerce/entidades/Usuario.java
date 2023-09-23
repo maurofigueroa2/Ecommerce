@@ -13,22 +13,22 @@ public class Usuario {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "nombre")
+    @Column(name = "nombre", nullable = false, length = 30)
     private String nombre;
 
-    @Column(name = "apellido")
+    @Column(name = "apellido", nullable = false, length = 30)
     private String apellido;
 
-    @Column(name = "telefono")
+    @Column(name = "telefono", nullable = false, length = 15)
     private String telefono;
 
-    @Column(name = "nombre_usuario")
+    @Column(name = "nombre_usuario", nullable = false, length = 20,updatable = false)
     private String nombreUsuario;
 
-    @Column(name = "contrasenia")
+    @Column(name = "contrasenia", nullable = false, length = 25)
     private String contrasenia;
 
-    @OneToOne
+    @OneToOne(mappedBy = "carrito")
     private Carrito carrito;
 
     @ManyToOne

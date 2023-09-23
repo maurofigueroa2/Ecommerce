@@ -17,7 +17,7 @@ public class Tienda {
     private List<Publicacion> publicaciones;
 
     @OneToOne
-    @JoinColumn(name = "fk_usuario", referencedColumnName = "id")
+    @JoinColumn(name = "fk_usuario", referencedColumnName = "id",nullable = false,updatable = false)
     private Usuario usuario;
 
     public Tienda() {

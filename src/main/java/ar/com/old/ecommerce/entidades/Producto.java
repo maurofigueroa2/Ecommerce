@@ -1,6 +1,6 @@
 package ar.com.old.ecommerce.entidades;
 
-import org.hibernate.annotations.GenericGenerator;
+import ar.com.old.ecommerce.entidades.enums.Categoria;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -14,16 +14,16 @@ public class Producto {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nombre")
+    @Column(name = "nombre", nullable = false, length = 30)
     private String nombre;
 
-    @Column(name = "descripcion")
+    @Column(name = "descripcion", nullable = false, columnDefinition = "TEXT")
     private String descripcion;
 
-    @Column(name = "precio")
+    @Column(name = "precio", nullable = false)
     private double precio;
 
-    @Column(name = "cantidad")
+    @Column(name = "cantidad" , nullable = false)
     private Integer cantidad;
 
     @ElementCollection(targetClass = Categoria.class)

@@ -1,5 +1,7 @@
 package ar.com.old.ecommerce.entidades;
 
+import ar.com.old.ecommerce.entidades.enums.MetodoPago;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -10,9 +12,10 @@ public class Pago {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Enumerated(EnumType.STRING)
+    @Column(name = "metodo_pago",nullable = false)
     private MetodoPago metodoPago;
     @OneToOne
-    @JoinColumn(name = "fk_carrito")
+    @JoinColumn(name = "fk_carrito", referencedColumnName = "id")
     private Carrito carrito;
 
 
@@ -40,6 +43,7 @@ public class Pago {
     public void setCarrito(Carrito carrito) {
         this.carrito = carrito;
     }
+
 
     @Override
     public boolean equals(Object o) {

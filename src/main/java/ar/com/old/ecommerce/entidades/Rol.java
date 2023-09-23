@@ -1,6 +1,10 @@
 package ar.com.old.ecommerce.entidades;
 
+import ar.com.old.ecommerce.entidades.enums.Permisos;
+
 import javax.persistence.*;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -11,14 +15,18 @@ public class Rol {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "nombre")
+    @Column(name = "nombre", nullable = false, length = 20)
     private String nombre;
 
     @ElementCollection(targetClass = Permisos.class)
     @JoinTable(name = "rel_rol_permisos", joinColumns = @JoinColumn(name = "fk_rol"))
     @Enumerated(EnumType.STRING)
-    @Column(name = "permiso")
-    private Set<Permisos> permisos;
+    @Column(name = "permiso", nullable = false, length = 30)
+    private Set<Permisos> permisos;;
+
+    public Rol() {
+        this.permisos = new HashSet<>();
+    }
 
     public Long getId() {
         return id;
@@ -34,6 +42,14 @@ public class Rol {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public Boolean tienePermiso(Permisos permiso){
+        return permisos.stream().anyMatch(permisoActual -> permisos.contains(permiso));
+    }
+
+    void agregarPermisos(Permisos ... permisos){
+        Collections.addAll(this.permisos, permisos );
     }
 
     @Override
