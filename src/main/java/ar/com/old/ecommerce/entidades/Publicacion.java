@@ -1,10 +1,10 @@
 package ar.com.old.ecommerce.entidades;
 
+import ar.com.old.ecommerce.entidades.enums.Estado;
+
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name = "publicaciones")
@@ -21,24 +21,21 @@ public class Publicacion {
     )
     private List<Producto> productos;
 
-    @Column(name = "fecha_publicacion")
+    @Column(name = "fecha_publicacion",nullable = false,updatable = false)
     private LocalDate fechaPublicacion;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "estado")
+    @Column(name = "estado", nullable = false, length = 20)
     private Estado estado;
 
-
     @ManyToOne
-    @JoinColumn(name = "fk_tienda", referencedColumnName = "id")
+    @JoinColumn(name = "fk_tienda", referencedColumnName = "id", nullable = false)
     private Tienda tienda;
 
     public Publicacion() {
         this.productos = new ArrayList<>();
-    }
-
-    public void agregarProductos(Producto producto){
-        productos.add(producto);
+        this.fechaPublicacion = LocalDate.now();
+        this.estado = Estado.PUBLICADO;
     }
 
     public Long getId() {
@@ -71,6 +68,19 @@ public class Publicacion {
 
     public void setTienda(Tienda tienda) {
         this.tienda = tienda;
+    }
+
+    public List<Producto> getProductos() {
+        return productos;
+    }
+
+    public void agregarProductos(Producto ... producto){
+        Collections.addAll(productos ,producto);
+    }
+
+    public double generarPrecioTotal(){
+       return this.productos.stream().map(producto -> producto.getPrecio()).reduce((a,b) -> a + b).get();
+
     }
 
     @Override

@@ -17,7 +17,7 @@ public class Tienda {
     private List<Publicacion> publicaciones;
 
     @OneToOne
-    @JoinColumn(name = "fk_usuario", referencedColumnName = "id")
+    @JoinColumn(name = "fk_usuario", referencedColumnName = "id",nullable = false,updatable = false)
     private Usuario usuario;
 
     public Tienda() {
@@ -44,6 +44,11 @@ public class Tienda {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+    public List<Publicacion> getPublicaciones() {
+        return publicaciones;
+    }
+
 
     @Override
     public boolean equals(Object o) {

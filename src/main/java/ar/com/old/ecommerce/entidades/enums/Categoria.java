@@ -1,4 +1,4 @@
-package ar.com.old.ecommerce.entidades;
+package ar.com.old.ecommerce.entidades.enums;
 
 public enum Categoria {
     TECNOLOGIA,
