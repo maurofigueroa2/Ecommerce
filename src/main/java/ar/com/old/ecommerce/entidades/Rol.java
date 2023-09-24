@@ -48,7 +48,12 @@ public class Rol {
         return permisos.stream().anyMatch(permisoActual -> permisos.contains(permiso));
     }
 
-    void agregarPermisos(Permisos ... permisos){
+    public Set<Permisos> getPermisos() {
+        return permisos;
+    }
+
+
+    public void agregarPermisos(Permisos ... permisos){
         Collections.addAll(this.permisos, permisos );
     }
 

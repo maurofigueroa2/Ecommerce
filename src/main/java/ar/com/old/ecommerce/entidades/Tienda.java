@@ -45,6 +45,11 @@ public class Tienda {
         this.usuario = usuario;
     }
 
+    public List<Publicacion> getPublicaciones() {
+        return publicaciones;
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
