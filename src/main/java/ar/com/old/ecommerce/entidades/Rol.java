@@ -53,8 +53,12 @@ public class Rol {
     }
 
 
-    public void agregarPermisos(Permisos ... permisos){
-        Collections.addAll(this.permisos, permisos );
+    public boolean agregarPermisos(Permisos ... permisos){
+        return permisos != null && Collections.addAll(this.permisos, permisos );
+    }
+
+    public boolean eliminarPermiso(Permisos permiso ){
+        return this.permisos.remove(permiso);
     }
 
     @Override

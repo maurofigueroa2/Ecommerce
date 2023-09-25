@@ -25,8 +25,10 @@ public class Tienda {
     }
 
     public boolean agregarPublicacion(Publicacion publicacion){
-        publicacion.setTienda(this);
-        return  this.publicaciones.add(publicacion);
+        if (publicacion != null) {
+            publicacion.setTienda(this);
+            return publicaciones.add(publicacion);
+        }return false;
     }
 
     public boolean eliminarPublicacion(Publicacion publicacion) {

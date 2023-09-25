@@ -36,6 +36,11 @@ public class TiendaTest {
     }
 
     @Test
+    void noAgregaPublicacionNula(){
+        Assertions.assertFalse(tienda.agregarPublicacion(null));
+    }
+
+    @Test
     void eliminaPublicacion(){
         Assertions.assertFalse(tienda.eliminarPublicacion(publicacion));
         tienda.agregarPublicacion(publicacion);
@@ -56,5 +61,16 @@ public class TiendaTest {
         Assertions.assertEquals(tienda, tienda2);
         Assertions.assertEquals(tienda.hashCode(),tienda2.hashCode());
         Assertions.assertNotEquals(null,tienda);
+    }
+
+    @Test
+    void getterAndSetters(){
+        tienda = new Tienda();
+        tienda.setUsuario(usuario);
+        tienda.setId(2L);
+        tienda.agregarPublicacion(publicacion);
+        Assertions.assertNotNull(tienda.getId());
+        Assertions.assertNotNull(tienda.getUsuario());
+        Assertions.assertNotNull(tienda.getPublicaciones());
     }
 }

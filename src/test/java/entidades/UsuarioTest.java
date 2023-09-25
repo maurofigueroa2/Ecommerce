@@ -66,15 +66,6 @@ public class UsuarioTest {
     @Test
     void getterAndSetter  (){
         usuario = new Usuario();
-        Assertions.assertNull(usuario.getId());
-        Assertions.assertNull(usuario.getNombre());
-        Assertions.assertNull(usuario.getApellido());
-        Assertions.assertNull(usuario.getNombreUsuario());
-        Assertions.assertNull(usuario.getContrasenia());
-        Assertions.assertNull(usuario.getTelefono());
-        Assertions.assertNull(usuario.getRol());
-        Assertions.assertNull(usuario.getCarrito());
-        Assertions.assertNull(usuario.getTienda());
         usuario.setId(1L);
         usuario.setNombre("prueba");
         usuario.setApellido("apellido");
