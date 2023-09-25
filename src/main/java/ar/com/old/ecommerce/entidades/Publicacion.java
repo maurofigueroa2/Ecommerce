@@ -38,6 +38,16 @@ public class Publicacion {
         this.estado = Estado.PUBLICADO;
     }
 
+
+    public boolean agregarProductos(Producto ... producto){
+        return producto != null && Collections.addAll(productos, producto);
+    }
+
+    public boolean eliminarProducto(Producto producto){
+        return this.productos.remove(producto);
+    }
+
+
     public Long getId() {
         return id;
     }
@@ -58,9 +68,6 @@ public class Publicacion {
         return fechaPublicacion;
     }
 
-    public void setFechaPublicacion(LocalDate fechaPublicacion) {
-        this.fechaPublicacion = fechaPublicacion;
-    }
 
     public Tienda getTienda() {
         return tienda;
@@ -74,14 +81,8 @@ public class Publicacion {
         return productos;
     }
 
-    public void agregarProductos(Producto ... producto){
-        Collections.addAll(productos ,producto);
-    }
 
-    public double generarPrecioTotal(){
-       return this.productos.stream().map(producto -> producto.getPrecio()).reduce((a,b) -> a + b).get();
 
-    }
 
     @Override
     public boolean equals(Object o) {

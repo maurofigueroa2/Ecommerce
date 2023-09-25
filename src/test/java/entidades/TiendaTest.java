@@ -1,30 +1,76 @@
 package entidades;
 
+import ar.com.old.ecommerce.entidades.Publicacion;
 import ar.com.old.ecommerce.entidades.Tienda;
-import org.junit.jupiter.api.Assertions;
+import ar.com.old.ecommerce.entidades.Usuario;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import org.junit.jupiter.api.Assertions;
 
-import static entidades.Tester.*;
+
 public class TiendaTest {
     Tienda tienda;
+    Publicacion publicacion;
+    Usuario usuario;
 
     @BeforeEach
     void init(){
-        tienda = getTienda();
-        tienda.setUsuario(getUsuario());
+        tienda = new Tienda();
+        tienda.setId(1L);
+        publicacion = new Publicacion();
+        usuario = new Usuario();
+
     }
 
     @Test
-    void tienePublicaciones(){
-        Assertions.assertTrue(tienda.getPublicaciones().isEmpty());
-        tienda.agregarPublicacion(getPublicacion());
-        Assertions.assertFalse(tienda.getPublicaciones().isEmpty());
+    void agregaPublicaciones(){
+        Assertions.assertTrue(tienda.agregarPublicacion(publicacion));
+    }
+
+    @Test
+    void agrega2Publicaciones(){
+        tienda.agregarPublicacion(publicacion);
+        tienda.agregarPublicacion(publicacion);
+        Assertions.assertEquals(2,tienda.getPublicaciones().size());
+    }
+
+    @Test
+    void noAgregaPublicacionNula(){
+        Assertions.assertFalse(tienda.agregarPublicacion(null));
+    }
+
+    @Test
+    void eliminaPublicacion(){
+        Assertions.assertFalse(tienda.eliminarPublicacion(publicacion));
+        tienda.agregarPublicacion(publicacion);
+        Assertions.assertTrue(tienda.eliminarPublicacion(publicacion));
     }
 
     @Test
     void tieneUsuario(){
-        Assertions.assertTrue(tienda.getUsuario() != null);
+        Assertions.assertNull(tienda.getUsuario());
+        tienda.setUsuario(usuario);
+        Assertions.assertNotNull(tienda.getUsuario());
+    }
+
+    @Test
+    void equalsAndHashCode(){
+        Tienda tienda2 = new Tienda();
+        tienda2.setId(1L);
+        Assertions.assertEquals(tienda, tienda2);
+        Assertions.assertEquals(tienda.hashCode(),tienda2.hashCode());
+        Assertions.assertNotEquals(null,tienda);
+    }
+
+    @Test
+    void getterAndSetters(){
+        tienda = new Tienda();
+        tienda.setUsuario(usuario);
+        tienda.setId(2L);
+        tienda.agregarPublicacion(publicacion);
+        Assertions.assertNotNull(tienda.getId());
+        Assertions.assertNotNull(tienda.getUsuario());
+        Assertions.assertNotNull(tienda.getPublicaciones());
     }
 }
