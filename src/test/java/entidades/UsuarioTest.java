@@ -1,35 +1,98 @@
 package entidades;
 
+import ar.com.old.ecommerce.entidades.Carrito;
+import ar.com.old.ecommerce.entidades.Rol;
+import ar.com.old.ecommerce.entidades.Tienda;
 import ar.com.old.ecommerce.entidades.Usuario;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import static entidades.Tester.*;
 import org.junit.jupiter.api.Test;
 
 public class UsuarioTest {
     Usuario usuario;
+    Rol rol;
+    Tienda tienda;
+    Carrito carrito;
 
     @BeforeEach
      void init(){
-        usuario = getUsuario();
-        usuario.setRol(getRol());
-        usuario.setTienda(getTienda());
-        usuario.setCarrito(getCarrito());
+        usuario = new Usuario();
+        usuario.setId(1L);
+        usuario.setNombre("prueba");
+        usuario.setApellido("1234");
+        usuario.setNombreUsuario("user1");
+        usuario.setContrasenia("123123123");
+        usuario.setTelefono("1122334422");
+
+        rol = new Rol();
+        rol.setNombre("Admin");
+
+        tienda = new Tienda();
+
+        carrito = new Carrito();
+
     }
 
     @Test
-    void tieneRolAdministrador(){
-        Assertions.assertEquals("Administrador", usuario.getRol().getNombre());
+    void puedeAgregarRol(){
+        usuario.setRol(rol);
+        Assertions.assertEquals("Admin", usuario.getRol().getNombre());
     }
 
     @Test
-    void tieneTienda(){
-        Assertions.assertEquals(3,usuario.getTienda().getId());
+    void  puedeAgregarTienda(){
+        Assertions.assertNull(usuario.getTienda());
+        usuario.setTienda(tienda);
+        Assertions.assertNotNull(usuario.getTienda());
     }
 
     @Test
-    void tieneCarrito(){
-        Assertions.assertTrue(usuario.getCarrito() != null);
+    void puedeAgregarCarrito(){
+        Assertions.assertNull(usuario.getCarrito());
+        usuario.setCarrito(carrito);
+        Assertions.assertNotNull(usuario.getCarrito());
+
     }
 
+    @Test
+    void equalsAndHashCode(){
+        Usuario usuario2 = new Usuario();
+        usuario2.setId(1L);
+        Assertions.assertEquals(usuario, usuario2);
+        Assertions.assertEquals(usuario.hashCode(),usuario2.hashCode());
+        Assertions.assertNotEquals(null, usuario);
+    }
+
+    @Test
+    void getterAndSetter  (){
+        usuario = new Usuario();
+        Assertions.assertNull(usuario.getId());
+        Assertions.assertNull(usuario.getNombre());
+        Assertions.assertNull(usuario.getApellido());
+        Assertions.assertNull(usuario.getNombreUsuario());
+        Assertions.assertNull(usuario.getContrasenia());
+        Assertions.assertNull(usuario.getTelefono());
+        Assertions.assertNull(usuario.getRol());
+        Assertions.assertNull(usuario.getCarrito());
+        Assertions.assertNull(usuario.getTienda());
+        usuario.setId(1L);
+        usuario.setNombre("prueba");
+        usuario.setApellido("apellido");
+        usuario.setNombreUsuario("user1");
+        usuario.setContrasenia("1234");
+        usuario.setTelefono("1234444123");
+        usuario.setRol(rol);
+        usuario.setTienda(tienda);
+        usuario.setCarrito(carrito);
+        Assertions.assertNotNull(usuario.getId());
+        Assertions.assertNotNull(usuario.getNombre());
+        Assertions.assertNotNull(usuario.getApellido());
+        Assertions.assertNotNull(usuario.getNombreUsuario());
+        Assertions.assertNotNull(usuario.getContrasenia());
+        Assertions.assertNotNull(usuario.getTelefono());
+        Assertions.assertNotNull(usuario.getRol());
+        Assertions.assertNotNull(usuario.getCarrito());
+        Assertions.assertNotNull(usuario.getTienda());
+
+    }
 }

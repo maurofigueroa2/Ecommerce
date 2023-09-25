@@ -39,9 +39,6 @@ public class Usuario {
     private Tienda tienda;
 
 
-    public Usuario() {
-    }
-
 
     public Long getId() {
         return id;

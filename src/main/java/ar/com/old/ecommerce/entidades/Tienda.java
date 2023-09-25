@@ -24,9 +24,14 @@ public class Tienda {
         publicaciones = new ArrayList<>();
     }
 
-    public void agregarPublicacion(Publicacion publicacion){
+    public boolean agregarPublicacion(Publicacion publicacion){
         publicacion.setTienda(this);
-        this.publicaciones.add(publicacion);
+        return  this.publicaciones.add(publicacion);
+    }
+
+    public boolean eliminarPublicacion(Publicacion publicacion) {
+        return this.publicaciones.remove(publicacion);
+
     }
 
     public Long getId() {
