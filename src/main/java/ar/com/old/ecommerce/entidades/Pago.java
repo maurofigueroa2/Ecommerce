@@ -18,7 +18,16 @@ public class Pago {
     @JoinColumn(name = "fk_carrito", referencedColumnName = "id")
     private Carrito carrito;
 
+    @OneToOne(mappedBy = "pago")
+    private Orden orden;
 
+    public void pagar(){
+        //TODO enviar pago
+        Orden orden = new Orden();
+        this.orden = orden;
+        orden.generarOrden(this);
+
+    }
 
     public Long getId() {
         return id;
@@ -44,6 +53,13 @@ public class Pago {
         this.carrito = carrito;
     }
 
+    public Orden getOrden() {
+        return orden;
+    }
+
+    public void setOrden(Orden orden) {
+        this.orden = orden;
+    }
 
     @Override
     public boolean equals(Object o) {

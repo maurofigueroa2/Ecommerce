@@ -27,9 +27,16 @@ public class Orden {
     @Column(name = "fecha")
     private LocalDate fecha;
 
-    public Orden() {
-        this.fecha = LocalDate.now();
+    public Orden (){
     }
+
+    public void generarOrden(Pago pago) {
+        this.pago = pago;
+        this.fecha = LocalDate.now();
+        this.tienda = pago.getCarrito().getUsuario().getTienda();
+        this.usuario = pago.getCarrito().getUsuario();
+    }
+
 
     public Long getId() {
         return Id;

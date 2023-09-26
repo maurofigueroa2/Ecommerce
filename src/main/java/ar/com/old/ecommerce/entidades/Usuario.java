@@ -1,6 +1,8 @@
 package ar.com.old.ecommerce.entidades;
 
 
+import ar.com.old.ecommerce.entidades.enums.Permisos;
+
 import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
@@ -38,6 +40,9 @@ public class Usuario {
     @OneToOne(mappedBy = "usuario")
     private Tienda tienda;
 
+    public Boolean tienePermiso(Permisos permiso){
+        return this.rol.getPermisos().stream().anyMatch(permisoActual -> permisoActual == permiso);
+    }
 
 
     public Long getId() {

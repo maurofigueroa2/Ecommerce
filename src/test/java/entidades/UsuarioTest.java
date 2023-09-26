@@ -4,6 +4,7 @@ import ar.com.old.ecommerce.entidades.Carrito;
 import ar.com.old.ecommerce.entidades.Rol;
 import ar.com.old.ecommerce.entidades.Tienda;
 import ar.com.old.ecommerce.entidades.Usuario;
+import ar.com.old.ecommerce.entidades.enums.Permisos;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -52,6 +53,19 @@ public class UsuarioTest {
         usuario.setCarrito(carrito);
         Assertions.assertNotNull(usuario.getCarrito());
 
+    }
+
+    @Test
+    void tienePermisoDeAgregarProductos(){
+        rol.agregarPermisos(Permisos.AGREGAR_PRODUCTOS);
+        usuario.setRol(rol);
+        Assertions.assertTrue(usuario.tienePermiso(Permisos.AGREGAR_PRODUCTOS));
+    }
+
+    @Test
+    void noTienePermisoDeEliminarProductos(){
+        usuario.setRol(rol);
+        Assertions.assertFalse(usuario.tienePermiso(Permisos.ELIMINAR_PRODUCTOS));
     }
 
     @Test
