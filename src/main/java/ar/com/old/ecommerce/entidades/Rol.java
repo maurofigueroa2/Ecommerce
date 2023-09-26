@@ -44,9 +44,7 @@ public class Rol {
         this.nombre = nombre;
     }
 
-    public Boolean tienePermiso(Permisos permiso){
-        return permisos.stream().anyMatch(permisoActual -> permisos.contains(permiso));
-    }
+
 
     public Set<Permisos> getPermisos() {
         return permisos;

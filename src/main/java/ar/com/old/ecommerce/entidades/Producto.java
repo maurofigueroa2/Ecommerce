@@ -1,6 +1,7 @@
 package ar.com.old.ecommerce.entidades;
 
 import ar.com.old.ecommerce.entidades.enums.Categoria;
+import ar.com.old.ecommerce.utilidades.CalculadorDePrecios;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -81,8 +82,21 @@ public class Producto {
     }
 
 
-    public void agregarCategoria(Categoria categoria){
-    this.categorias.add(categoria);
+    public boolean agregarCategoria(Categoria categoria){
+        if (categoria != null) {
+            return this.categorias.add(categoria);
+        }return false;
+    }
+    public boolean eliminarCategoria(Categoria categoria){
+        return this.categorias.remove(categoria);
+    }
+
+    public double calcularPrecioSinIVA(){
+        return CalculadorDePrecios.calcularPrecioSinIVA(this.precio,this.cantidad);
+    }
+
+    public double calcularPrecioConIVA(){
+        return CalculadorDePrecios.calcularPrecioConIVA(this.precio,this.cantidad);
     }
 
     @Override

@@ -42,16 +42,7 @@ public class RolTest {
         Assertions.assertFalse(rol.eliminarPermiso(null));
     }
 
-    @Test
-    void tienePermisoDeAgregarProductos(){
-        rol.agregarPermisos(Permisos.AGREGAR_PRODUCTOS);
-        Assertions.assertTrue(rol.getPermisos().contains(Permisos.AGREGAR_PRODUCTOS));
-    }
 
-    @Test
-    void noTienePermisoDeBorrarProductos(){
-        Assertions.assertFalse(rol.tienePermiso(Permisos.ELIMINAR_PRODUCTOS));
-    }
 
     @Test
     void equalsAndHashCode(){
