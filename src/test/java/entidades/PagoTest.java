@@ -24,7 +24,6 @@ public class PagoTest {
         carrito = new Carrito();
         carrito.setUsuario(usuario);
         carrito.setId(1L);
-        carrito.setPago(pago);
     }
 
     @Test
@@ -39,7 +38,7 @@ public class PagoTest {
         Assertions.assertNull(pago.getOrden());
         pago.pagar();
         Assertions.assertNotNull(pago.getOrden());
-        Assertions.assertEquals("123",pago.getOrden().getUsuario().getNombre());
+        Assertions.assertEquals("123",pago.getOrden().getComprador().getNombre());
     }
 
     @Test

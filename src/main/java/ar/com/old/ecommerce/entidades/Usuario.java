@@ -30,9 +30,6 @@ public class Usuario {
     @Column(name = "contrasenia", nullable = false, length = 25)
     private String contrasenia;
 
-    @OneToOne(mappedBy = "carrito")
-    private Carrito carrito;
-
     @ManyToOne
     @JoinColumn(name = "fk_rol")
     private Rol rol;
@@ -93,13 +90,7 @@ public class Usuario {
         this.contrasenia = contrasenia;
     }
 
-    public Carrito getCarrito() {
-        return carrito;
-    }
 
-    public void setCarrito(Carrito carrito) {
-        this.carrito = carrito;
-    }
 
     public Rol getRol() {
         return rol;

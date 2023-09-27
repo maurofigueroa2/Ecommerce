@@ -14,7 +14,7 @@ public class Carrito {
 
     @OneToOne
     @JoinColumn(name = "fk_usuario", referencedColumnName = "id")
-    private Usuario usuario;
+    private Usuario comprador;
 
     @ManyToMany
     @JoinTable(name = "rel_car_publ",
@@ -25,9 +25,6 @@ public class Carrito {
             @JoinColumn(name = "fk_publicacion")
     })
     private List<Publicacion> publicaciones;
-
-    @OneToOne(mappedBy = "carrito")
-    private Pago pago;
 
     public Carrito() {
         this.publicaciones = new ArrayList<>();
@@ -42,30 +39,23 @@ public class Carrito {
     }
 
     public Usuario getUsuario() {
-        return usuario;
+        return comprador;
     }
 
     public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+        this.comprador = usuario;
     }
 
-    public Pago getPago() {
-        return pago;
-    }
-
-    public void setPago(Pago pago) {
-        this.pago = pago;
-    }
 
     public List<Publicacion> getPublicaciones() {
         return publicaciones;
     }
 
-    public void agregarPublicacion(Publicacion publicacion){
-        this.publicaciones.add(publicacion);
+    public boolean agregarPublicacion(Publicacion publicacion){
+        return this.publicaciones.add(publicacion);
     }
-    public void eliminarPublicacion(Publicacion publicacion){
-        this.publicaciones.remove(publicacion);
+    public boolean eliminarPublicacion(Publicacion publicacion){
+        return this.publicaciones.remove(publicacion);
     }
 
     @Override

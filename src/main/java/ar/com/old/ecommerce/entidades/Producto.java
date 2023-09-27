@@ -37,6 +37,25 @@ public class Producto {
         categorias = new HashSet<>();
     }
 
+
+    public boolean agregarCategoria(Categoria categoria){
+        if (categoria != null) {
+            return this.categorias.add(categoria);
+        }return false;
+    }
+    public boolean eliminarCategoria(Categoria categoria){
+        return this.categorias.remove(categoria);
+    }
+
+    public double calcularPrecioSinIVA(){
+        return CalculadorDePrecios.calcularPrecioSinIVA(this.precio,this.cantidad);
+    }
+
+    public double calcularPrecioConIVA(){
+        return CalculadorDePrecios.calcularPrecioConIVA(this.precio,this.cantidad);
+    }
+
+
     public Long getId() {
         return id;
     }
@@ -81,23 +100,6 @@ public class Producto {
         this.cantidad = cantidad;
     }
 
-
-    public boolean agregarCategoria(Categoria categoria){
-        if (categoria != null) {
-            return this.categorias.add(categoria);
-        }return false;
-    }
-    public boolean eliminarCategoria(Categoria categoria){
-        return this.categorias.remove(categoria);
-    }
-
-    public double calcularPrecioSinIVA(){
-        return CalculadorDePrecios.calcularPrecioSinIVA(this.precio,this.cantidad);
-    }
-
-    public double calcularPrecioConIVA(){
-        return CalculadorDePrecios.calcularPrecioConIVA(this.precio,this.cantidad);
-    }
 
     @Override
     public boolean equals(Object o) {

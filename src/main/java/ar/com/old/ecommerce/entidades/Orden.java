@@ -2,7 +2,7 @@ package ar.com.old.ecommerce.entidades;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name = "orden")
@@ -17,12 +17,8 @@ public class Orden {
     private Pago pago;
 
     @OneToOne
-    @JoinColumn(name = "fk_tienda",referencedColumnName = "id",nullable = false)
-    private Tienda tienda;
-
-    @OneToOne
-    @JoinColumn(name = "fk_usuario",referencedColumnName = "id",nullable = false)
-    private Usuario usuario;
+    @JoinColumn(name = "fk_comprador",referencedColumnName = "id",nullable = false)
+    private Usuario comprador;
 
     @Column(name = "fecha")
     private LocalDate fecha;
@@ -32,9 +28,9 @@ public class Orden {
 
     public void generarOrden(Pago pago) {
         this.pago = pago;
+        pago.setOrden(this);
         this.fecha = LocalDate.now();
-        this.tienda = pago.getCarrito().getUsuario().getTienda();
-        this.usuario = pago.getCarrito().getUsuario();
+        this.comprador = pago.getCarrito().getUsuario();
     }
 
 
@@ -46,36 +42,17 @@ public class Orden {
         Id = id;
     }
 
+    public Usuario getComprador() {
+        return comprador;
+    }
+
+
     public Pago getPago() {
         return pago;
     }
 
-    public void setPago(Pago pago) {
-        this.pago = pago;
-    }
-
-    public Tienda getTienda() {
-        return tienda;
-    }
-
-    public void setTienda(Tienda tienda) {
-        this.tienda = tienda;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
     public LocalDate getFecha() {
         return fecha;
-    }
-
-    public void setFecha(LocalDate fecha) {
-        this.fecha = fecha;
     }
 
     @Override
