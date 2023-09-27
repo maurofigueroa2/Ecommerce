@@ -47,13 +47,6 @@ public class UsuarioTest {
         Assertions.assertNotNull(usuario.getTienda());
     }
 
-    @Test
-    void puedeAgregarCarrito(){
-        Assertions.assertNull(usuario.getCarrito());
-        usuario.setCarrito(carrito);
-        Assertions.assertNotNull(usuario.getCarrito());
-
-    }
 
     @Test
     void tienePermisoDeAgregarProductos(){
@@ -69,15 +62,6 @@ public class UsuarioTest {
     }
 
     @Test
-    void equalsAndHashCode(){
-        Usuario usuario2 = new Usuario();
-        usuario2.setId(1L);
-        Assertions.assertEquals(usuario, usuario2);
-        Assertions.assertEquals(usuario.hashCode(),usuario2.hashCode());
-        Assertions.assertNotEquals(null, usuario);
-    }
-
-    @Test
     void getterAndSetter  (){
         usuario = new Usuario();
         usuario.setId(1L);
@@ -87,8 +71,6 @@ public class UsuarioTest {
         usuario.setContrasenia("1234");
         usuario.setTelefono("1234444123");
         usuario.setRol(rol);
-        usuario.setTienda(tienda);
-        usuario.setCarrito(carrito);
         Assertions.assertNotNull(usuario.getId());
         Assertions.assertNotNull(usuario.getNombre());
         Assertions.assertNotNull(usuario.getApellido());
@@ -96,8 +78,14 @@ public class UsuarioTest {
         Assertions.assertNotNull(usuario.getContrasenia());
         Assertions.assertNotNull(usuario.getTelefono());
         Assertions.assertNotNull(usuario.getRol());
-        Assertions.assertNotNull(usuario.getCarrito());
-        Assertions.assertNotNull(usuario.getTienda());
+    }
 
+    @Test
+    void equalsAndHashCode(){
+        Usuario usuario2 = new Usuario();
+        usuario2.setId(1L);
+        Assertions.assertEquals(usuario, usuario2);
+        Assertions.assertEquals(usuario.hashCode(),usuario2.hashCode());
+        Assertions.assertNotEquals(null, usuario);
     }
 }

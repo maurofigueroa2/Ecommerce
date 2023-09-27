@@ -7,8 +7,8 @@ import javax.persistence.Persistence;
 public class testMain {
     public static void main(String[] args) {
 
-//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("mysql-persistence");
-//        EntityManager em = emf.createEntityManager();
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("mysql-persistence");
+        EntityManager em = emf.createEntityManager();
 
     }
 
