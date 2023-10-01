@@ -1,0 +1,154 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: Cambria, Cochin;
+}
+a{
+    color: #fff;
+    text-decoration: none;
+}
+
+.header-nav{
+    width: 100%;
+    height: 6rem;
+    background-color:#111122;
+}
+
+.menu-arriba{
+    display: flex;
+    height: 4rem;
+}
+
+.logo-img{
+    width: 5vw;
+    height: 100%;
+    overflow: hidden;
+}
+
+.logo-img img{
+    width: 100%;
+    height: 100%;
+}
+
+.buscador-container{
+    width: 70vw;
+    height: 100%;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    padding-bottom: .5rem;
+    box-sizing: border-box;
+    
+
+}
+.form-search{
+    height: 2.5rem;
+    width: 90%;
+    display: flex;
+    padding: 0 1rem;
+}
+.buscador-inp{
+    height: 2.5rem;
+    width: 95%;
+    border: none;
+    border-top-left-radius: 7px;
+    border-bottom-left-radius: 7px;
+    outline: none;
+    padding: 0 1rem;
+    font-size: 1rem;
+    color: #111122;
+} 
+
+.btn-search{
+    width: 5%;
+    height: 2.5rem;
+    background-color: #fff;
+    outline: none;
+    border: none;
+    z-index: 1;
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+    border-left: 1px solid #111122;
+}
+
+.icono-search{
+    width: 100%;
+    height: 100%;
+    color: #232347;
+    cursor: pointer;
+} 
+
+.sesion{
+    width:15vw;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    color: #fff;
+    padding-bottom: .5rem;
+}
+
+.sesion a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icono-login{
+    color:#fff;
+    height: 2rem;
+    width: 2rem;
+}
+
+.carrito{
+    width:10vw;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    color: #fff;
+    padding-bottom: .5rem;
+}
+.carrito a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icono-carrito{
+    width: 2rem;
+    height: 2rem;
+}
+.menu-abajo{
+    height: 2rem;
+    display: flex;
+    background-color: #222233;
+
+}
+.menu-hamb{
+    width: 6rem;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+
+}
+.menu-hamb p {
+    cursor: pointer;
+}
+
+.icono-menu{
+    width: 1.5rem;
+    height: 1.5rem;
+    cursor: pointer;
+}
+
+.menu-categorias{
+    display: flex;
+    align-items: center;
+}
+.categorias, .ofertas, .popular{
+    width: 8rem;
+    display: flex;
+    justify-content: center;
+
+}
